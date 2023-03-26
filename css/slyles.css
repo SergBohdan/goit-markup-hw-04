@@ -12,7 +12,7 @@
   --navy-blue-modal-overlay: #2e2f42;
   --grey-hero-background: #2e2f42;
   --text-white-background: #ffffff;
-  --transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --timing-function: 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 img {
@@ -205,7 +205,7 @@ body {
   border-radius: 4px;
   margin-top: 48px;
   border: none;
-  transition: background-color var(--timing-function);
+  transition: background var(--timing-function);
 }
 
 .hero-btn:hover,
@@ -346,6 +346,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: background var(--timing-function);
 }
 
 .team-soc-link:hover,
@@ -390,10 +391,12 @@ body {
   padding: 10px;
   margin: 0;
   color: var(--light-slate-subtle-text);
+  transition: border var(--timing-function) color;
 }
 
 .customers-icon {
   fill: currentColor;
+  transition: fill var(--timing-function);
 }
 
 .customers-link:hover,
@@ -477,11 +480,68 @@ body {
 
 .footer-soc-icon {
   fill: var(--cloud-light);
+  transition: background var(--timing-function);
 }
 
 .footer-soc-link:hover,
 .footer-soc-link:focus {
   background-color: var(--green-success);
+}
+
+/**------------------ Modal ---------------------**/
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(46, 47, 66, 0.4);
+
+  transition: opacity var(--timing-function) visability var(--timing-function);
+}
+
+.backdrop.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 408px;
+  height: 576px;
+  background-color: var(--text-white-background);
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: var(--cornflower-accent);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 0;
+  transition: background-color var(--timing-function);
+}
+
+.modal-close-icon {
+  transition: fill var(--timing-function);
+}
+
+.modal-close-btn:hover,
+.modal-close-btn:focus {
+  fill: var(--text-white-background);
+  background-color: var(--ocean-pressed-state);
 }
 
 /**--------------- Portfolio.html ---------------**/
@@ -518,6 +578,7 @@ body {
   padding: 12px 24px;
   border: 1px solid var(--cornflower-accent);
   border-radius: 4px;
+  transition: background var(--timing-function) color box-shadow;
 }
 
 .btn:hover {
@@ -537,7 +598,10 @@ body {
 .project-list {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
   gap: 48px 24px;
+  box-sizing: border-box;
 }
 
 .project-container {
@@ -547,7 +611,7 @@ body {
   border-bottom: 1px solid var(--cornflower-accent);
 }
 
-.project-item {
+.project-list .project-item {
   flex-basis: calc((100% - 48px) / 3);
 }
 
@@ -569,4 +633,35 @@ body {
   font-size: 16px;
   line-height: 1.5;
   color: var(--slate-text);
+}
+
+.project-link {
+  display: block;
+}
+
+.project-img-box {
+  position: relative;
+  overflow: hidden;
+}
+
+.ovarlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color: var(--cloud-light);
+  font-size: 16px;
+  padding: 40px 32px;
+  line-height: 1.5;
+  overflow-y: scroll;
+
+  background-color: var(--iris-primary-brand);
+  transition: transform var(--timing-function);
+  transform: translateY(100%);
+}
+
+.project-link:hover .ovarlay,
+.project-link:focus .ovarlay {
+  transform: translateY(0%);
 }
